@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Clocck</title>
+</head>
+<body>
+
+<div class="main">
+  <h1>Pomodoro clock or wahtever it is called</h1>
+  <h3>Break length</h3>
+  <p id=countdown>5:00</p>
+  <button id="incriment2">+</button>
+  <button id="decrement2">-</button>
+
+  <h3>Session length</h3>
+  <p id="countdown2">25:00</p>
+  <button onclick="Start()" id="Start">Start the timer</button>
+  <button id="stop">Stoping it please</button>
+  <button id="incriment">+</button>
+  <button id="decrement">-</button>
+</div>
+
+</body>
+
+<script>
+
+let addButton = document.getElementById('incriment');
+let minusButton = document.getElementById('decrement');
+let minutes = 25;
+let seconds = 60;
+let addButton2 = document.getElementById('incriment2');
+let minusButton2 = document.getElementById('decrement2');
+let minutes2 = 5;
+
+function startTimer(duration, display) {
+    var timer = duration, seconds;
+
+    var timerId = setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          display.innerHTML = 'done';
+          console.log('stop');
+          clearInterval(timerId);
+          Start2();
+        }
+
+        document.addEventListener("click", function (){
+          document.getElementById('stop').onclick = clearInterval(timerId);
+        });
+
+    }, 100);
+}
+
+function Add(){
+    minutes = minutes + 1;
+    display = document.getElementById('countdown2').innerHTML = minutes + ":" + '00';
+};
+
+function Subtract(){
+    minutes = minutes - 1;
+    display = document.getElementById('countdown2').innerHTML = minutes + ":" + '00';
+};
+
+addButton.addEventListener("click", Add);
+minusButton.addEventListener("click", Subtract);
+
+function Start(){
+    let twentyFiveMinutes = seconds * minutes,
+        display = document.getElementById('countdown2');
+        startTimer(twentyFiveMinutes, display);
+};
+//////////////////////////////////////////////////////////////////////////////////
+function startTimer2(duration, display) {
+    var timer = duration, seconds;
+
+    setInterval(function () {
+        minutes2 = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes2 = minutes2 < 10 ? "0" + minutes2 : minutes2;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes2 + ":" + seconds;
+
+        if (--timer < 0) {
+          display.innerHTML = 'done';
+        }
+    }, 100);
+}
+
+function Add2(){
+    minutes2 = minutes2 + 1;
+    display = document.getElementById('countdown').innerHTML = minutes2 + ":" + '00';
+};
+
+function Subtract2(){
+    minutes2 = minutes2 - 1;
+    display = document.getElementById('countdown').innerHTML = minutes2 + ":" + '00';
+};
+
+addButton2.addEventListener("click", Add2);
+minusButton2.addEventListener("click", Subtract2);
+
+function Start2(){
+    let fiveMinutes = 60 * minutes2,
+        display = document.getElementById('countdown');
+        startTimer2(fiveMinutes, display);
+};
+
+
+
+/*function runFunction(){
+  let d = new Date();
+  let goosen = d.getTime();
+  goosen = checkTime(goosen);
+  document.getElementById('countdown').innerHTML = goosen;
+  let t = setTimeout(runFunction, 500);
+}
+
+function checkTime(i){
+  if(i < 10){
+    i = "0" + i
+  }
+  return i;
+}*/
+
+</script>
+
+<style media="screen">
+  .main {
+    text-align: center;
+  }
+
+</style>
+
+</html>
